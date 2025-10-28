@@ -1,4 +1,4 @@
-import {react, useState, useEffect, useRef} from "react";
+import { react, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Entry.css";
 import "./Chats_Space.css"
@@ -10,6 +10,8 @@ const Chats_Space = () => {
     const userImage = useRef(null);
     const userName = useRef(null);
     const [userDate, setUserDate] = useState("");
+     // Display Time on chat
+     const [timeSent, setTimesent] = useState("");
     useEffect(() => {
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString("en-US", {
@@ -17,10 +19,17 @@ const Chats_Space = () => {
             year: "numeric",  // e.g., 2025
             month: "long",    // e.g., October
             day: "numeric"    // e.g., 27
-          });
+        });
         const currentDates = currentDate.getDate();
         const currentMonth = currentDate.getMonth() + 1;
         const getYear = currentDate.getFullYear();
+        const currentTime = currentDate.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true
+        });
+        console.log(currentTime);
+        setTimesent(`${currentTime}`);
         setUserDate(`${formattedDate}`);
         console.log(userDate)
     })
@@ -55,22 +64,56 @@ const Chats_Space = () => {
     const [isChatVisible, setIsChatVisible] = useState(false);
     // Send a message in the box
     const [message, setMessage] = useState("");
+    const [messages, setMessages] = useState([]);
+    const [isSendVisible, setIsSendVisible] = useState(false);
     const inputChat = useRef(null);
     const sendIcon = useRef(null);
-    useEffect(() => {
-            const handleChat = () => {
-                const chatInput = inputChat.current;
-                if (chatInput === "") {
-                    alert("Cannot send empty message")
-                    return
-                }
-                setMessage(chatInput.value.trim())
-            };
-            sendIcon.current.addEventListener("click", handleChat);
-            // return () => {
-            //     sendIcon.current.removeEventListener("click", handleChat)
-            // }
-    })
+    const send = sendIcon.current;
+    // useEffect(() => {
+    //     const input = inputChat.current;
+    //     //Chekc whether input is null before continuing;
+    //     if (!input) return;
+    //    const validateInput = () => {
+    //     if (input.value.trim() === "") {
+    //         setIsSendVisible(false);
+    //     }else{
+    //         setIsSendVisible(true)
+    //     }
+    //    };
+    //    input.addEventListener("input", validateInput);
+    //    return () => {
+    //     input.removeEventListener("input", validateInput);
+    //    }
+
+    // }, [])
+
+        const handleChat = () => {
+            if (message.trim() === "") {
+                alert("Cannot send empty message");
+                return;
+            }
+            setIsChatVisible(true);
+
+            // Add message to messages array
+            setMessages((prev) => [...prev, message.trim()]);
+
+            // Clear the input box
+            setMessage("");
+        };
+            // Send Message when users clicks Enter
+//     useEffect(() => {
+//         const inputSend = inputChat.current;
+//         if(!inputSend) return;
+//             const handleKeyDown = (e) => {
+//                 if (e.key === "Enter") {
+//                     handleChat()
+//                 }
+//             };
+//             inputSend.addEventListener("keydown", handleKeyDown);
+//             return () => {
+//                 inputSend.removeEventListener("keydown", handleKeyDown)
+//             }
+// }, [handleChat])
     return (
         <>
             <div className="chatInterface container">
@@ -84,9 +127,9 @@ const Chats_Space = () => {
                     <div className="user-image">
                         <img src={user.avatar} alt={user.name} ref={userImage} />
                         <div className="username">
-                        <p><strong ref={userName}>{user.name}</strong></p>
-                        <p><small>typing...</small></p>
-                    </div>
+                            <p><strong ref={userName}>{user.name}</strong></p>
+                            <p><small>typing...</small></p>
+                        </div>
                     </div>
                     <div className="call">
                         <button>
@@ -100,22 +143,33 @@ const Chats_Space = () => {
                 <div className="chatBody">
                     <div className="chatMessageContainer">
                         <div className="chatMessage">
-                           <small> {user.message}</small>
+                            <small> {user.message}</small>
+                            
                         </div>
-                        <div className="userChat">
-                            <small>{message}</small>
-                        </div>
+                        {isChatVisible && messages.map((msg, index) => (
+                             <div className="userChat">
+                             <small key={index}>{msg}</small>
+                             <span><small id="time-sent">{timeSent}</small></span>
+                         </div>
+                        ))
+                        }
                     </div>
                     <div className="chat-box">
                         <div className="chatInput">
-                        <div className="central-reactions">
-                            <div><i className="fa-regular fa-face-smile"></i></div>
-                            <div className="internal">
-                            <i className="fa-solid fa-link" ref={sendIcon}></i>
-                            <i className="fa-solid fa-camera"></i>
+                            <div className="central-reactions">
+                                <div><i className="fa-regular fa-face-smile"></i></div>
+                                <div className="internal">
+                                    {isSendVisible && (
+                                        <i className="fa-solid fa-paper-plane" ref={sendIcon} onClick={handleChat}></i>
+                                    )}
+                                    <i className="fa-solid fa-camera"></i>
+                                </div>
                             </div>
-                        </div>
-                            <textarea ref={inputChat} name="message" placeholder="Type a message" id="chatInput" draggable="false" ></textarea>
+                            <textarea  ref={inputChat} value={message} name="message" 
+                             onChange={(e) => {
+                                setMessage(e.target.value);
+                                setIsSendVisible(e.target.value.trim() !== "");
+                              }} placeholder="Type a message" id="chatInput" draggable="false" ></textarea>
                         </div>
                         <div className="voiceMessage">
                             <button>

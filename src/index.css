@@ -15,3 +15,9 @@
   --clr-deem-black: #181a2f;
   --clr-red-main: #b4182d;
 }
+
+/* Disable the tap highlight effect on mobile browsers */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none; /* optional: prevents long-press callouts */
+}
