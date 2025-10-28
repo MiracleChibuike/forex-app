@@ -1,0 +1,121 @@
+
+
+/* Root Colors */
+:root{
+    --clr-dark: #1d1d1d;
+    --clr-light: #eaeaea;
+    --clr-deem-black: #181a2f;
+    --clr-input: rgb(75, 73, 73);
+    --clr-red-main: linear-gradient(rgba(208, 24, 24, 0.7), rgba(213, 16, 16, 0.9));
+    --clr-light-main: #fff;
+  }
+  body{
+    background: var(--clr-input);
+  }
+.container{
+    margin: 10px 40px;
+}
+@media screen and (min-width: 0) and (max-width: 750px) {
+    .container{
+        margin: 10px 10px;
+    }
+}
+.menu{
+    display: flex;
+    justify-content: space-between;
+}
+#userAvatar{
+    border: 4px solid var(--clr-deem-black);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--clr-deem-black);
+}
+.logo{
+    display: flex;
+}
+.user h2{
+    margin-left: 12px;
+    margin-top: 12px;
+    font-weight: 800;
+    color: var(--clr-light-main);
+}
+.Add button{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    color: var(--clr-light-main);
+    background: var(--clr-red-main);
+    display: flex;
+    justify-content: center;
+    border: none;
+    box-shadow: 0 0.39px 5px var(--clr-light);
+    cursor: pointer;
+}
+.Add button i{
+    font-size: 20px;
+    margin-top: 12px;
+}
+#searchInput{
+    width: 100%;
+    padding: 8px 25px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    background: var(--clr-dark);
+    border: 4px solid var(--clr-dark);
+    /* box-shadow: 0 0.29px 10px var(--clr-light); */
+    color: var(--clr-light-main);
+}
+::placeholder{
+    font-weight: bold;
+    color: var(--clr-light)
+}
+.search{
+    margin: 15px 0;
+}
+/* Contacts */
+.user-card{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.user-profile{
+    color: var(--clr-light-main);
+}
+.user-profile img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    border: 4px solid var(--clr-deem-black);
+    box-shadow: 0 0 10px var(--clr-deem-black);
+}
+.user-profile{
+    display: flex;
+}
+.user-infos{
+    margin-left: 15px;
+    margin-top: 13px;
+}
+.user-infos small{
+    color: var(--clr-light);
+}
+.user button{
+    color: #ea747b;
+    background: transparent;
+    border: none;
+    font-weight: bold;
+}
+#msg-indicator{
+    background: var(--clr-red-main);
+    color: var(--clr-light-main);
+    padding: 3px 6px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px var(--clr-deem-black);
+}
+.contactsCard{
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 15px;
+}
+@media screen and (min-width: 0) and (max-width: 750px) {
+    
+}
