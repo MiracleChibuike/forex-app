@@ -94,6 +94,9 @@
 .add-user.hide{
     visibility: hidden;
 }
+.hideInterface{
+    visibility: hidden;
+}
 .user-add-interface{
     background: var(--clr-light-main);
     padding: 10px 15px;

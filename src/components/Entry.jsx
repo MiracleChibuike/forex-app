@@ -14,19 +14,21 @@ const Entry = () => {
 
     // Show User Drops
     const userInterface = useRef(null);
+
+    // Show User Drops
     const showUser = () => {
-        const activeUserInterface = userInterface.current;
-        if(!activeUserInterface) return;
-        activeUserInterface.classList.toggle("show");
-    }
+      if (!userInterface.current) return;
+      userInterface.current.classList.remove("hide");
+      userInterface.current.classList.add("show");
+    };
+  
     // Hide User Drops
-    const userInterfaceHide = useRef(null);
     const hideUserInterface = () => {
-        const activeUserInterface = userInterfaceHide.current;
-        if(!activeUserInterface) return;
-        alert("Hello")
-        activeUserInterface.classList.toggle("hide");
-    }
+      if (!userInterface.current) return;
+      userInterface.current.classList.remove("show");
+      userInterface.current.classList.add("hide");
+    };
+
     const navigate = useNavigate();
     let chatsCard = useRef(null);
     // console.log(chatsCard)
@@ -118,7 +120,7 @@ const Entry = () => {
                         </div>
                     </div>
                     <div className="closeBox">
-                        <button onClick={hideUserInterface} ref={userInterfaceHide}>Cancel</button>
+                        <button onClick={hideUserInterface}>Cancel</button>
                     </div>
                 </div>
                 {/* Users Div */}
