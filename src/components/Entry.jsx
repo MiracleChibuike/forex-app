@@ -8,7 +8,25 @@ import { useState, useEffect, useRef } from "react";
 
 const Entry = () => {
 
-  
+    document.addEventListener("copy", (e) => {
+        e.preventDefault()
+    });
+
+    // Show User Drops
+    const userInterface = useRef(null);
+    const showUser = () => {
+        const activeUserInterface = userInterface.current;
+        if(!activeUserInterface) return;
+        activeUserInterface.classList.toggle("show");
+    }
+    // Hide User Drops
+    const userInterfaceHide = useRef(null);
+    const hideUserInterface = () => {
+        const activeUserInterface = userInterfaceHide.current;
+        if(!activeUserInterface) return;
+        alert("Hello")
+        activeUserInterface.classList.toggle("hide");
+    }
     const navigate = useNavigate();
     let chatsCard = useRef(null);
     // console.log(chatsCard)
@@ -70,12 +88,38 @@ const Entry = () => {
                    </div>
                 </div>
                 <div className="Add">
-                    <button> <i className="fa-solid fa-plus"></i></button>
+                    <button onClick={showUser} > <i className="fa-solid fa-plus"></i></button>
                 </div>
             
                 </div>
                 <div className="search">
                     <input type="search" placeholder="Search" id="searchInput" />
+                </div>
+                {/* User Add Interface */}
+                <div className="add-user" ref={userInterface}>
+                    <div className="user-add-interface" >
+                        <div className="add-user-chat">
+                            <div className="user-add-icon">
+                                <i className="fa-solid fa-message"></i>
+                            </div>
+                            <div className="add-user-text">
+                                <p><strong>New Chat</strong></p>
+                                <p><small>Send a message to your contacts</small></p>
+                            </div>
+                        </div>
+                        <div className="add-user-contact">
+                            <div className="add-user-user">
+                            <i class="fa-solid fa-address-book"></i>
+                            </div>
+                            <div className="add-user-user-txt">
+                                <p><strong>New Contact</strong></p>
+                                <p><small>Add a new contact to be able to send messages</small></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="closeBox">
+                        <button onClick={hideUserInterface} ref={userInterfaceHide}>Cancel</button>
+                    </div>
                 </div>
                 {/* Users Div */}
                 <div className="contacts">
@@ -132,6 +176,34 @@ const Entry = () => {
                                 {/* <button id="msg-indicator">100</button> */}
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className="bottomNavs">
+                    <div className="bottom-contents">
+                    <div className="chat-nav active">
+                        <button>
+                        <i className="fa-solid fa-message" id="active" ></i>
+                        </button>
+                        <p><small className="active">Chats</small></p>
+                    </div>
+                    <div className="camera-navigate">
+                        <button>
+                            <i className="fa-solid fa-camera"></i>
+                        </button>
+                        <p><small>Photos</small></p>
+                    </div>
+                    <div className="scan-navigate">
+                        <button>
+                        <i className="fa-solid fa-qrcode"></i>
+                        </button>
+                        <p><small>Scan</small></p>
+                    </div>
+                    <div className="settings-navigate">
+                        <button>
+                        <i className="fa-solid fa-gear"></i>
+                        </button>
+                        <p><small>Settings</small></p>
+                    </div>
                     </div>
                 </div>
                 {/* Bottom Container */}

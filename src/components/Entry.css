@@ -72,6 +72,80 @@
 .search{
     margin: 15px 0;
 }
+/* Add New User box */
+.add-user{
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  filter: blur(50%);
+  visibility: hidden;
+  /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Always on top */
+  transition: 3000ms ease-in-out;
+}
+.add-user.show{
+    visibility: visible;
+}
+.add-user.hide{
+    visibility: hidden;
+}
+.user-add-interface{
+    background: var(--clr-light-main);
+    padding: 10px 15px;
+    border-radius: 10px;
+    max-width: 700px;
+    width: 90vw;
+    /* text-align: center; */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    /* text-align: left; */
+}
+.closeBox{
+    text-align: center;
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 20px;
+}
+.closeBox button{
+    width: 30vw;
+    padding: 10px;
+    border-radius: 45px;
+    border: none;
+    background: var(--clr-light);
+    font-weight: bold;
+    cursor: pointer;
+
+}
+.add-user-chat, .add-user-contact{
+    display: flex;
+    margin: 8px 0;
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 10px 5px;
+}
+.add-user-chat:hover, .add-user-contact:hover{
+    background: var(--clr-dark);
+    color: var(--clr-light-main);
+}
+.add-user-text, .add-user-user-txt{
+    margin-left: 25px;
+}
 /* Contacts */
 .user-card{
     display: flex;
@@ -115,6 +189,51 @@
     display: grid;
     grid-template-columns: auto;
     row-gap: 15px;
+}
+/* Bottom Navs for the bottom navigations */
+.bottomNavs{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--clr-dark);
+    box-shadow: 0 0 20px var(--clr-dark);
+    border-radius: 40px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 8px 0;
+}
+.bottom-contents{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+.bottom-contents > div{
+    color: var(--clr-light);
+    text-align: center;
+}
+
+::selection{
+    background: var(--clr-red-main);
+
+}
+
+.active, #active{
+    color: #ea747b;
+    font-weight: bold;
+}
+.bottom-contents > div button{
+    background: #333131;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 50px var(--clr-deem-black);
+    padding: 8px;
+    border-radius: 50%;
+}
+.bottom-contents > div button i{
+    font-size: 25px;
+    color: var(--clr-light-main);
 }
 @media screen and (min-width: 0) and (max-width: 750px) {
     
